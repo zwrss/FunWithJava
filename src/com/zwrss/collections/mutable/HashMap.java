@@ -19,13 +19,27 @@ public class HashMap<K, V> {
     }
 
     private int bucketsCount = 16;
+    private int doubles = 0;
+
     private LinkedList[] buckets = new LinkedList[bucketsCount];
 
-    // TODO resizing
+    public void resize(int newBucketsCount) {
+        LinkedList[] oldBuckets = buckets;
+        bucketsCount = newBucketsCount;
+        buckets = new LinkedList[newBucketsCount];
+        doubles = 0;
+        for (LinkedList<Entry> bucket : buckets) {
+            if (bucket != null) bucket.foreach(entry -> put(entry.key, entry.value));
+        }
+    }
+
     public void put(K key, V value) {
         int bucketNo = key.hashCode() % bucketsCount;
         if (buckets[bucketNo] == null) buckets[bucketNo] = new LinkedList<Entry>();
-        buckets[bucketNo].add(new Entry(key, value));
+        LinkedList<Entry> bucket = buckets[bucketNo];
+        bucket.add(new Entry(key, value));
+        if (bucket.size() == 2) doubles += 1;
+        if (doubles > bucketsCount / 2) resize(bucketsCount * 2);
     }
 
     public V get(K key) {
@@ -33,6 +47,10 @@ public class HashMap<K, V> {
         if (bucket == null) return null;
         Entry entry = bucket.find(e -> e.key.equals(key));
         return entry == null ? null : entry.value;
+    }
+
+    public int getBucketsCount() {
+        return bucketsCount;
     }
 
 }

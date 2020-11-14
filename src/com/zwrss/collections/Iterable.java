@@ -5,13 +5,13 @@ import java.util.function.Predicate;
 
 public interface Iterable<T> {
 
-    public void foreach(Consumer<T> callback);
+    void foreach(Consumer<T> callback);
 
-    public T find(Predicate<T> predicate);
+    T find(Predicate<T> predicate);
 
-    public boolean isEmpty();
+    boolean isEmpty();
 
-    public default boolean isNonEmpty() {
+    default boolean isNonEmpty() {
         return !isEmpty();
     }
 

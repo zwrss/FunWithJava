@@ -34,13 +34,13 @@ public class Array<T> implements Iterable<T> {
         for (int i = 0; i < elements.length; i++) {
             mappedElements[i] = callback.apply(elements[i]);
         }
-        return new Array<V>(mappedElements);
+        return new Array<>(mappedElements);
     }
 
     public Array<T> add(T element) {
         T[] newElements = Arrays.copyOf(elements, elements.length + 1);
         newElements[newElements.length - 1] = element;
-        return new Array<T>(newElements);
+        return new Array<>(newElements);
     }
 
     public int size() {

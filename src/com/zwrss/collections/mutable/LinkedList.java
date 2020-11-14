@@ -3,6 +3,10 @@ package com.zwrss.collections.mutable;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+/**
+ * Very simple Linked List. It is not supposed to be optimal neither 100% valid. Educational means only.
+ * @param <T> type of elements
+ */
 public class LinkedList<T> implements Iterable<T> {
 
     private class Link {
@@ -47,7 +51,6 @@ public class LinkedList<T> implements Iterable<T> {
         return null;
     }
 
-    @Override
     public int size() {
         int size = 0;
         Link link = next;
@@ -56,5 +59,10 @@ public class LinkedList<T> implements Iterable<T> {
             link = link.next;
         }
         return size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return next == null;
     }
 }

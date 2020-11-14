@@ -37,15 +37,18 @@ public class Array<T> implements Iterable<T> {
         return new Array<V>(mappedElements);
     }
 
-    @Override
     public Array<T> add(T element) {
         T[] newElements = Arrays.copyOf(elements, elements.length + 1);
         newElements[newElements.length - 1] = element;
         return new Array<T>(newElements);
     }
 
-    @Override
     public int size() {
         return elements.length;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size() == 0;
     }
 }

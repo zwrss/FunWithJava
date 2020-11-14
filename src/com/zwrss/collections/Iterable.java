@@ -9,6 +9,10 @@ public interface Iterable<T> {
 
     public T find(Predicate<T> predicate);
 
-    public int size();
+    public boolean isEmpty();
+
+    public default boolean isNonEmpty() {
+        return !isEmpty();
+    }
 
 }

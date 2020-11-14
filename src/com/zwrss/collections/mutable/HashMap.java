@@ -1,5 +1,11 @@
 package com.zwrss.collections.mutable;
 
+/**
+ * This is a very simple implementation of a HashMap. It in no means should be treated as alternative to Java's native
+ * HashMap. This is for educational means only.
+ * @param <K> type of key
+ * @param <V> type of value
+ */
 public class HashMap<K, V> {
 
     private class Entry {
@@ -15,6 +21,7 @@ public class HashMap<K, V> {
     private int bucketsCount = 16;
     private LinkedList[] buckets = new LinkedList[bucketsCount];
 
+    // TODO resizing
     public void put(K key, V value) {
         int bucketNo = key.hashCode() % bucketsCount;
         if (buckets[bucketNo] == null) buckets[bucketNo] = new LinkedList<Entry>();

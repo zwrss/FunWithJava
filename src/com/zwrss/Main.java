@@ -1,8 +1,11 @@
 package com.zwrss;
 
 import com.zwrss.collections.immutable.Array;
+import com.zwrss.collections.immutable.Stream;
 import com.zwrss.collections.mutable.HashMap;
 import com.zwrss.collections.mutable.LinkedList;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
@@ -53,5 +56,22 @@ public class Main {
         System.out.println(map.get(3));
         System.out.println(map.get(4));
 
+        System.out.println("");
+        System.out.println("Stream:");
+
+        AtomicInteger counter = new AtomicInteger(0);
+        Stream<String> stream = Stream.apply(() -> {
+            int value = counter.getAndIncrement();
+            System.out.println("Calculated value " + value);
+            if (value < 50) return "Element: " + value;
+            else return null;
+        });
+        for (int i = 0; i < 100; i++) {
+            System.out.println("Try " + i);
+            if (stream.isNonEmpty()) {
+                System.out.println(stream.head());
+                stream = stream.tail();
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
-    public static void main(String[] args) {
+    private static void testArray() {
 
         System.out.println("Immutable Array:");
         System.out.println();
@@ -31,6 +31,11 @@ public class Main {
         System.out.println(strArray2.size());
         strArray2.foreach(System.out::println);
 
+    }
+
+    private static void testList() {
+
+
         System.out.println();
         System.out.println("Linked List");
 
@@ -41,6 +46,10 @@ public class Main {
 
         System.out.println(list.size());
         list.foreach(System.out::println);
+    }
+
+    private static void testHashMap() {
+
 
         System.out.println();
         System.out.println("HashMap:");
@@ -55,6 +64,19 @@ public class Main {
         System.out.println(map.get(2));
         System.out.println(map.get(3));
         System.out.println(map.get(4));
+
+        System.out.println();
+        System.out.println("HashMap resizing:");
+
+        HashMap<Integer, Integer> intsMap = new HashMap<>();
+        for (int i = 0; i < 100; i++) {
+            System.out.println("Iteration: " + i);
+            intsMap.put(i, i);
+            System.out.println("Buckets: " + intsMap.getBucketsCount());
+        }
+    }
+
+    private static void testStream() {
 
         System.out.println();
         System.out.println("Stream:");
@@ -111,16 +133,14 @@ public class Main {
             System.out.println(streamFromArray.head());
             streamFromArray = streamFromArray.tail();
         }
+    }
 
-        System.out.println();
-        System.out.println("HashMap resizing:");
+    public static void main(String[] args) {
 
-        HashMap<Integer, Integer> intsMap = new HashMap<>();
-        for (int i = 0; i < 100; i++) {
-            System.out.println("Iteration: " + i);
-            intsMap.put(i, i);
-            System.out.println("Buckets: " + intsMap.getBucketsCount());
-        }
+        testArray();
+        testList();
+        testHashMap();
+        testStream();
 
     }
 }
